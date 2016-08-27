@@ -1,5 +1,9 @@
 # Activities Assignment 
 
+## Contexto
+
+El presente curso ha sido diseñado por [Diego Mercado](https://github.com/mercadodiego) como materia optativa para la Facultad de Astronomía, Matemática y Física (FaMAF) perteneciente a la Universidad Nacional de Córdoba, Argentina. 
+
 ## Objetivos
 
 * Conocer la comunicación entre Actividades y su ciclo de vida
