@@ -2,7 +2,7 @@
 
 ## Contexto
 
-El presente curso ha sido diseñado por [Diego Mercado](https://github.com/mercadodiego) como materia optativa _"Programación en Android: Introducción"_ de la Facultad de Astronomía, Matemática y Física (FaMAF) perteneciente a la Universidad Nacional de Córdoba, Argentina. 
+El presente curso ha sido diseñado por [Diego Mercado](https://github.com/mercadodiego) para la materia optativa _"Programación en Android: Introducción"_ de la Facultad de Astronomía, Matemática y Física (FaMAF) perteneciente a la Universidad Nacional de Córdoba, Argentina. 
 
 ## Objetivos
 
