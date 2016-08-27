@@ -12,12 +12,9 @@
 
 ## Condiciones de entrega
 
+* Se debe trabajar en un repositorio GIT propio. Mayor información en: https://git-scm.com/book/en/v2/Git-Basics-Working-with-RemotesGIT
+* La entrega consistirá en indicar en que TAG fue subido el mismo 
 * No debe contener carpetas/archivos autogenerados
 * Debe compilar. De lo contrario no será considerada como una entrega valida
 * Debe desarrollarse usando Android Studio 2.1.3 (o cualquier versión superior del canal estable)
 * Conservar Minimum SDK: API Level 15 y Target SDK: API Level 23 
-
-## Recomendaciones de entrega
-
-* Se sugiere trabajar en un repositorio GIT propio. Mayor información en: https://git-scm.com/book/en/v2/Git-Basics-Working-with-RemotesGIT
-
