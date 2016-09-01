@@ -16,7 +16,7 @@ El presente curso ha sido diseñado por [Diego Mercado](https://github.com/merca
 
 ## Condiciones de entrega
 
-* Se debe trabajar en un repositorio GIT propio. Mayor información en: https://git-scm.com/book/en/v2/Git-Basics-Working-with-RemotesGIT
+* Se debe trabajar en un repositorio GIT propio. Mayor información en: https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
 * La entrega consistirá en indicar en que TAG fue subido el mismo 
 * No debe contener carpetas/archivos autogenerados
 * Debe compilar. De lo contrario no será considerada como una entrega valida
