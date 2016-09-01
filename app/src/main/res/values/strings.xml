@@ -15,4 +15,8 @@
         completions."
     </string>
 
+    <string name="title_activity_news">"Activity News"
+    </string>
+
+
 </resources>
