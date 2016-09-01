@@ -11,8 +11,8 @@ El presente curso ha sido diseñado por [Diego Mercado](https://github.com/merca
 ## Enunciado
 
 * Descargar el proyecto desde https://github.com/mercadodiego/ActivitiesAssignment
-* En la acción del botón Login llevar a la actividad de noticias y mostrar en la barra superior el email del usuario logueado
-* Al seleccionar logout llevar de nuevo a la actividad de Login
+* En la acción del Sign inLogin invocar LoginActivity
+* Una vez finalizado, debera mostrar el nombre del usuario logueado en pantalla
 
 ## Condiciones de entrega
 
