@@ -1,4 +1,4 @@
-# Activities Assignment 
+# Layout Assignment 
 
 ## Contexto
 
@@ -6,13 +6,14 @@ El presente curso ha sido diseñado por [Diego Mercado](https://github.com/merca
 
 ## Objetivos
 
-* Conocer la comunicación entre Actividades y su ciclo de vida
+* Conocer los principios básicos de Layouts, View y ViewGroups en Android
+* Modificar y agregar recursos gráficos y de texto a la aplicación 
 
 ## Enunciado
 
-* Descargar el proyecto desde https://github.com/mercadodiego/ActivitiesAssignment
-* En la acción del Sign inLogin invocar LoginActivity
-* Una vez finalizado, debera mostrar el nombre del usuario logueado en pantalla
+1. Descargar el proyecto desde https://github.com/mercadodiego/LayoutAssignment
+2. Cambiar el nombre de la aplicación para que aparezca como "Reddit Reader" en inglés y "Lector de Reddit" en castellano
+3. Cambiar el ícono de la aplicación por el de esta imagen ![alt text](https://bitbucket.org/mercadodiego/layoutassignment/images/reddit_icon.png "imagen")
 
 ## Condiciones de entrega
 
