@@ -1,4 +1,4 @@
-# Activities Assignment 
+# Activities Assignment | Android Reddit Reader - Step 1
 
 ## Contexto
 
