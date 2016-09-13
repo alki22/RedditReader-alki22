@@ -1,5 +1,6 @@
 package famaf.unc.edu.ar.activitiesassignment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class NewsActivity extends AppCompatActivity {
+
+    static final int EMAIL_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,26 @@ public class NewsActivity extends AppCompatActivity {
         return true;
     }
 
+    private void getEmail() {
+        Intent getEmailIntent = new Intent(this, LoginActivity.class);
+        startActivityForResult(getEmailIntent, EMAIL_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EMAIL_REQUEST) {
+            TextView textView = (TextView) findViewById(R.id.loginStatusTextView);
+
+            if (resultCode == RESULT_OK) {
+                String email = (String) data.getExtras().getString("EMAIL");
+                textView.setText("User " + email + " logged in");
+            } else{
+                textView.setText(R.string.login_error);
+            }
+
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -35,8 +58,7 @@ public class NewsActivity extends AppCompatActivity {
         if (id == R.id.action_sign_in) {
             NewsActivityFragment newsfragment = (NewsActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.news_activity_fragment_id);
-            TextView textView = (TextView) findViewById(R.id.loginStatusTextView);
-            textView.setText("User XXXX logged in");
+            getEmail();
             return true;
         }
 
