@@ -3,6 +3,7 @@ package famaf.unc.edu.ar.activitiesassignment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -116,6 +117,10 @@ public class LoginActivity extends AppCompatActivity  {
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+            Intent userEmail = new Intent();
+            userEmail.putExtra("EMAIL", email);
+            setResult(RESULT_OK, userEmail);
+            finish();
         }
     }
 
