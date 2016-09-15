@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lector de Reddit</string>
+    <string name="action_sign_in">Inicia sesión o regístrate</string>
+    <string name="action_sign_in_short">Iniciar sesión</string>
+    <string name="action_sign_out">Cerrar sesión</string>
+    <string name="default_user">Ningún usuario ha iniciado sesión</string>
+    <string name="error_field_required">Este campo es obligatorio</string>
+    <string name="error_incorrect_password">Contraseña incorrecta</string>
+    <string name="error_invalid_email">E-mail no es válido</string>
+    <string name="error_invalid_password">La contraseña es muy corta</string>
+    <string name="login_error">Error, no se pudo iniciar sesión</string>
+    <string name="permission_rationale">Se requiere permiso para acceder a Contactos</string>
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Contraseña(opcional)</string>
+</resources>
