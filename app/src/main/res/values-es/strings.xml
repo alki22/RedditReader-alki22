@@ -13,4 +13,5 @@
     <string name="permission_rationale">Se requiere permiso para acceder a Contactos</string>
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Contraseña(opcional)</string>
+    <string name="title_activity_news" translatable="false">"Lector de Reddit"</string>
 </resources>
