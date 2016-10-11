@@ -6,15 +6,15 @@ import java.util.Date;
 
 public class PostModel {
     private String mTitle;
-    private String mAuthor;
     private String mPostDate;
+    private String mSubreddit;
     private int mCommentsNumber;
     private int mThumbnail;
 
-    public PostModel(String mTitle, String mAuthor, String mPostDate, int mCommentsNumber, int mThumbnail) {
+    public PostModel(String mTitle, String mPostDate, String mSubreddit, int mCommentsNumber, int mThumbnail) {
         this.mTitle = mTitle;
-        this.mAuthor = mAuthor;
         this.mPostDate = mPostDate;
+        this.mSubreddit = mSubreddit;
         this.mCommentsNumber = mCommentsNumber;
         this.mThumbnail = mThumbnail;
     }
@@ -27,14 +27,6 @@ public class PostModel {
         this.mTitle = mTitle;
     }
 
-    public String getmAuthor() {
-        return mAuthor;
-    }
-
-    public void setmAuthor(String mAuthor) {
-        this.mAuthor = mAuthor;
-    }
-
     public String getmPostDate() {
         return mPostDate;
     }
@@ -43,7 +35,15 @@ public class PostModel {
         this.mPostDate = mPostDate;
     }
 
-    public Integer getmCommentsNumber() {
+    public String getmSubreddit() {
+        return mSubreddit;
+    }
+
+    public void setmSubreddit(String mSubreddit) {
+        this.mSubreddit = mSubreddit;
+    }
+
+    public int getmCommentsNumber() {
         return mCommentsNumber;
     }
 
@@ -55,7 +55,7 @@ public class PostModel {
         return mThumbnail;
     }
 
-    public void setmThumbnail(Integer mThumbnail) {
+    public void setmThumbnail(int mThumbnail) {
         this.mThumbnail = mThumbnail;
     }
 }
