@@ -9,9 +9,9 @@ public class PostModel {
     private String mPostDate;
     private String mSubreddit;
     private int mCommentsNumber;
-    private int mThumbnail;
+    private String mThumbnail;
 
-    public PostModel(String mTitle, String mPostDate, String mSubreddit, int mCommentsNumber, int mThumbnail) {
+    public PostModel(String mTitle, String mPostDate, String mSubreddit, int mCommentsNumber, String mThumbnail) {
         this.mTitle = mTitle;
         this.mPostDate = mPostDate;
         this.mSubreddit = mSubreddit;
@@ -51,11 +51,11 @@ public class PostModel {
         this.mCommentsNumber = mCommentsNumber;
     }
 
-    public int getmThumbnail() {
+    public String getmThumbnail() {
         return mThumbnail;
     }
 
-    public void setmThumbnail(int mThumbnail) {
+    public void setmThumbnail(String mThumbnail) {
         this.mThumbnail = mThumbnail;
     }
 }
