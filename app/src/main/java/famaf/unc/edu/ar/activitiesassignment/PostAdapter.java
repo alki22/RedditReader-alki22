@@ -112,7 +112,7 @@ public class PostAdapter extends ArrayAdapter<PostModel> {
             }
         }.execute(urls);
         holder.title.setText(post.getmTitle());
-        holder.commentsNumber.setText(String.valueOf(post.getmCommentsNumber()));
+        holder.commentsNumber.setText(String.valueOf(post.getmPoints()));
         holder.subreddit.setText(post.getmSubreddit());
         holder.postDate.setText(post.getmPostDate());
 
