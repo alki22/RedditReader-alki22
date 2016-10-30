@@ -13,16 +13,6 @@ public class PostModel {
     private int mPoints;
     private int mCommentsNumber;
 
-    public PostModel(String mTitle, String mSubreddit, String mAuthor, String mThumbnail, int mPostDate, int mPoints, int mCommentsNumber) {
-        this.mTitle = mTitle;
-        this.mSubreddit = mSubreddit;
-        this.mAuthor = mAuthor;
-        this.mThumbnail = mThumbnail;
-        this.mPostDate = mPostDate;
-        this.mPoints = mPoints;
-        this.mCommentsNumber = mCommentsNumber;
-    }
-
     public String getmTitle() {
         return mTitle;
     }
