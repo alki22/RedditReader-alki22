@@ -6,17 +6,21 @@ import java.util.Date;
 
 public class PostModel {
     private String mTitle;
-    private String mPostDate;
     private String mSubreddit;
-    private int mCommentsNumber;
+    private String mAuthor;
     private String mThumbnail;
+    private int mPostDate;
+    private int mPoints;
+    private int mCommentsNumber;
 
-    public PostModel(String mTitle, String mPostDate, String mSubreddit, int mCommentsNumber, String mThumbnail) {
+    public PostModel(String mTitle, String mSubreddit, String mAuthor, String mThumbnail, int mPostDate, int mPoints, int mCommentsNumber) {
         this.mTitle = mTitle;
-        this.mPostDate = mPostDate;
         this.mSubreddit = mSubreddit;
-        this.mCommentsNumber = mCommentsNumber;
+        this.mAuthor = mAuthor;
         this.mThumbnail = mThumbnail;
+        this.mPostDate = mPostDate;
+        this.mPoints = mPoints;
+        this.mCommentsNumber = mCommentsNumber;
     }
 
     public String getmTitle() {
@@ -27,20 +31,36 @@ public class PostModel {
         this.mTitle = mTitle;
     }
 
-    public String getmPostDate() {
-        return mPostDate;
-    }
-
-    public void setmPostDate(String mPostDate) {
-        this.mPostDate = mPostDate;
-    }
-
     public String getmSubreddit() {
         return mSubreddit;
     }
 
     public void setmSubreddit(String mSubreddit) {
         this.mSubreddit = mSubreddit;
+    }
+
+    public String getmAuthor() {
+        return mAuthor;
+    }
+
+    public void setmAuthor(String mAuthor) {
+        this.mAuthor = mAuthor;
+    }
+
+    public String getmThumbnail() {
+        return mThumbnail;
+    }
+
+    public void setmThumbnail(String mThumbnail) {
+        this.mThumbnail = mThumbnail;
+    }
+
+    public int getmPostDate() {
+        return mPostDate;
+    }
+
+    public void setmPostDate(int mPostDate) {
+        this.mPostDate = mPostDate;
     }
 
     public int getmCommentsNumber() {
@@ -51,11 +71,11 @@ public class PostModel {
         this.mCommentsNumber = mCommentsNumber;
     }
 
-    public String getmThumbnail() {
-        return mThumbnail;
+    public int getmPoints() {
+        return mPoints;
     }
 
-    public void setmThumbnail(String mThumbnail) {
-        this.mThumbnail = mThumbnail;
+    public void setmPoints(int mPoints) {
+        this.mPoints = mPoints;
     }
 }
