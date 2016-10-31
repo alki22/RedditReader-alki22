@@ -1,6 +1,7 @@
 package famaf.unc.edu.ar.activitiesassignment;
 
 import android.util.JsonReader;
+import android.util.JsonToken;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,101 +12,116 @@ import java.util.List;
 
 public class JsonParser {
 
-    public List<Listing> readJsons(InputStream jsons) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(jsons, "utf-8"));
-
+    public Listing readJsonStream(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
         try {
-            return readJsonArray(reader);
+            return readJSON(reader);
         } finally {
             reader.close();
         }
     }
 
-    public List<Listing> readJsonArray(JsonReader reader) throws IOException {
-        reader.beginObject();
-
-        List<Listing> listings = new ArrayList<Listing>();
+    public Listing readJSON(JsonReader reader) throws IOException {
         Listing listing = null;
-
-        while(reader.hasNext()) {
-            String name = reader.nextName();
-            if (name == "data") {
-                listing = readListing(reader);
-                listings.add(listing);
-            } else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-        return listings;
-    }
-
-    public Listing readListing(JsonReader reader) throws IOException {
-        String after, before;
-        after = before = null;
-
-        ArrayList<PostModel> posts = null;
-
         reader.beginObject();
-
-        while(reader.hasNext()) {
+        while (reader.hasNext()) {
             String name = reader.nextName();
             switch (name) {
-                case ("children"):
-                    posts = readChildren(reader);
-                case("after"):
-                    after = reader.nextString();
-                case("before"):
-                    before = reader.nextString();
+                case "data":
+                    listing = readData(reader);
+                    break;
                 default:
                     reader.skipValue();
+                    break;
             }
         }
+        reader.endObject();
+        reader.close();
+        return listing;
+    }
 
+    public Listing readData(JsonReader reader) throws  IOException {
+        String after = null;
+        String before = null;
+        ArrayList<PostModel> postList = null;
+
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            switch (name) {
+                case "children":
+                    postList = readChildren(reader);
+                    break;
+                case "after":
+                    after = reader.nextString();
+                    break;
+                case "before":
+                    if (reader.peek() != JsonToken.NULL)
+                        before = reader.nextString();
+                    try {
+                        before = reader.nextString();
+                    } catch (IllegalStateException e) {
+                        before = null;
+                        reader.nextNull();
+                    }
+
+                    break;
+                default:
+                    reader.skipValue();
+                    break;
+            }
+        }
         reader.endObject();
 
-        return new Listing(posts, after, before);
+        return new Listing(postList, after, before);
     }
 
     public ArrayList<PostModel> readChildren(JsonReader reader) throws IOException {
-        ArrayList<PostModel> posts = new ArrayList<PostModel>();
+        ArrayList<PostModel> postList = new ArrayList<PostModel>();
 
         reader.beginArray();
-
         while(reader.hasNext()) {
-            posts.add(readPost(reader));
+            postList.add(readPost(reader));
         }
-
         reader.endArray();
-        return posts;
+        return postList;
     }
 
     public PostModel readPost(JsonReader reader) throws IOException {
         PostModel post = new PostModel();
 
         reader.beginObject();
-
         while(reader.hasNext()) {
-            String name1 = reader.nextString();
-            if(name1 == "data") {
+            String name = reader.nextName();
+            if (name.equals("data")) {
                 reader.beginObject();
                 while(reader.hasNext()) {
-                    String name2 = reader.nextString();
-                    switch (name2) {
-                        case ("subreddit"):
+                    String name1 = reader.nextName();
+                    switch (name1) {
+                        case "subreddit":
                             post.setmSubreddit(reader.nextString());
-                        case ("score"):
+                            break;
+                        case "score":
                             post.setmPoints(reader.nextInt());
-                        case ("title"):
+                            break;
+                        case "title":
                             post.setmTitle(reader.nextString());
-                        case ("author"):
+                            break;
+                        case "author":
                             post.setmAuthor(reader.nextString());
-                        case ("num_comments"):
+                            break;
+                        case "num_comments":
                             post.setmCommentsNumber(reader.nextInt());
-                        case ("preview"):
-                            post.setmThumbnail(readThumbnail(reader));
+                            break;
+                        case "thumbnail":
+                            post.setmThumbnail(reader.nextString());
+                            break;
+                        case "created_utc":
+                            post.setmPostDate(reader.nextLong());
+                            break;
                         default:
                             reader.skipValue();
+                            break;
                     }
                 }
                 reader.endObject();
@@ -113,45 +129,9 @@ public class JsonParser {
                 reader.skipValue();
             }
         }
+        reader.endObject();
+
         return post;
     }
 
-    public String readThumbnail(JsonReader reader) throws IOException {
-        String thumbnail = null;
-
-        reader.beginObject();
-        while (reader.hasNext()) {
-            String name1 = reader.nextName();
-            if (name1 == "images") {
-                reader.beginArray();
-                while (reader.hasNext()) {
-                    reader.beginObject();
-                    while (reader.hasNext()) {
-                        String name2 = reader.nextName();
-                        if (name2 == "source") {
-                            reader.beginObject();
-                            while (reader.hasNext()) {
-                                String name3 = reader.nextName();
-                                if (name3 == "url") {
-                                    thumbnail = reader.nextString();
-                                } else {
-                                    reader.skipValue();
-                                }
-                            }
-                            reader.endObject();
-                        } else {
-                            reader.skipValue();
-                        }
-                    }
-                    reader.endObject();
-                }
-                reader.endArray();
-            } else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-
-        return thumbnail;
-    }
 }

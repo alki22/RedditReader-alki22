@@ -1,5 +1,7 @@
 package famaf.unc.edu.ar.activitiesassignment;
 
+import android.os.AsyncTask;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -7,21 +9,29 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class GetTopPostsTask {
+public class GetTopPostsTask extends AsyncTask<URL, Void, Listing> {
 
-    private URL url;
+    @Override
+    protected Listing doInBackground(URL... params) {
+        InputStream jsons = null;
 
-    public GetTopPostsTask() throws MalformedURLException{
-        url = new URL("https://www.reddit.com/top/.json");
-    }
+        try {
+            HttpURLConnection connection = null;
+            connection = (HttpURLConnection) params[0].openConnection();
+            connection.setRequestMethod("GET");
+            jsons = connection.getInputStream();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
-    public List<Listing> execute() throws IOException {
-        HttpURLConnection connection;
-        connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+        Listing listing = null;
 
-        InputStream jsons = connection.getInputStream();
+        try {
+            listing = new JsonParser().readJsonStream(jsons);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
-        return null;
+        return listing;
     }
 }

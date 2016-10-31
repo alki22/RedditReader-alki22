@@ -9,7 +9,7 @@ public class PostModel {
     private String mSubreddit;
     private String mAuthor;
     private String mThumbnail;
-    private int mPostDate;
+    private long mPostDate;
     private int mPoints;
     private int mCommentsNumber;
 
@@ -45,11 +45,11 @@ public class PostModel {
         this.mThumbnail = mThumbnail;
     }
 
-    public int getmPostDate() {
+    public long getmPostDate() {
         return mPostDate;
     }
 
-    public void setmPostDate(int mPostDate) {
+    public void setmPostDate(long mPostDate) {
         this.mPostDate = mPostDate;
     }
 

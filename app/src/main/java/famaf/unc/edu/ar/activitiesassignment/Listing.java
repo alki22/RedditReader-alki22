@@ -4,21 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Listing {
-    List<PostModel> mTopPosts;
-    String mAfter;
-    String mBefore;
+    private List<PostModel> mPostList;
+    private String mAfter;
+    private String mBefore;
 
-    public Listing(ArrayList<PostModel> topPosts, String after, String before) {
-        mTopPosts = topPosts;
+    public Listing(ArrayList<PostModel> posts, String after, String before) {
+        mPostList = posts;
         mAfter = after;
         mBefore = before;
     }
 
-    public void addPost(PostModel post) {
-        mTopPosts.add(post);
+    public List<PostModel> getmPostList() {
+        return mPostList;
     }
 
-    public List<PostModel> getPostsList() {
-        return mTopPosts;
+    public String getmAfter() {
+        return mAfter;
+    }
+
+    public String getmBefore() {
+        return mBefore;
+    }
+
+    public void setmPostList(List<PostModel> mPostList) {
+        this.mPostList = mPostList;
+    }
+
+    public void setmAfter(String mAfter) {
+        this.mAfter = mAfter;
+    }
+
+    public void setmBefore(String mBefore) {
+        this.mBefore = mBefore;
     }
 }

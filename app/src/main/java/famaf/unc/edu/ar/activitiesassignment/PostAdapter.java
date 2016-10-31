@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,31 +18,13 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 public class PostAdapter extends ArrayAdapter<PostModel> {
 
     private List<PostModel> PMList;
     int resourceNo;
-
-    class ImageDownloader extends AsyncTask<URL, Integer, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(URL ... urls) {
-            URL url = urls[0];
-            Bitmap bitmap = null;
-            HttpURLConnection connection = null;
-
-            try{
-                connection = (HttpURLConnection)url.openConnection();
-                InputStream stream = connection.getInputStream();
-                bitmap = BitmapFactory.decodeStream(stream, null, null);
-            } catch(IOException exception) {
-                exception.printStackTrace();
-            }
-
-            return bitmap;
-        }
-    }
 
     static class ViewHolder {
         TextView title;
@@ -59,7 +42,7 @@ public class PostAdapter extends ArrayAdapter<PostModel> {
     }
 
     @Override
-    public int getCount(){
+    public int getCount() {
         return PMList.size();
     }
 
@@ -69,22 +52,24 @@ public class PostAdapter extends ArrayAdapter<PostModel> {
     }
 
     @Override
-    public PostModel getItem(int position){
+    public PostModel getItem(int position) {
         return PMList.get(position);
     }
 
     @Override
-    public int getPosition(PostModel post){
+    public int getPosition(PostModel post) {
         return PMList.indexOf(post);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = vi.inflate(resourceNo, parent, false);
+        }
 
         final ViewHolder holder;
-        if (convertView == null) {
-            LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = vi.inflate(resourceNo, parent, false);
+        if (convertView.getTag() == null) {
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.post_title);
             holder.commentsNumber = (TextView) convertView.findViewById(R.id.comments_number);
@@ -93,40 +78,68 @@ public class PostAdapter extends ArrayAdapter<PostModel> {
             holder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
             holder.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         PostModel post = PMList.get(position);
 
-        URL[] urls = urlArrayCreate(post);
-        new ImageDownloader(){
+        boolean gotURL = false;
+        URL[] urlArray = null;
+
+        String thumbnail = post.getmThumbnail();
+        try {
+            urlArray = new URL[1];
+            urlArray[0] = new URL(thumbnail);
+            gotURL = true;
+        } catch (MalformedURLException exception) {
+            gotURL = false;
+        }
+
+        final boolean gotURLFinal = gotURL;
+        final URL[] urlArrayFinal = urlArray;
+
+        new ImageDownloader() {
             @Override
             protected void onPostExecute(Bitmap result) {
                 super.onPostExecute(result);
                 holder.bar.setIndeterminate(true);
                 holder.bar.setVisibility(View.GONE);
-                holder.thumbnail.setImageBitmap(result);
-                holder.thumbnail.setVisibility(View.VISIBLE);
+                if (gotURLFinal) {
+                    holder.thumbnail.setImageBitmap(result);
+                } else {
+                    holder.thumbnail.setImageResource(R.mipmap.ic_launcher);
+                }
             }
-        }.execute(urls);
+        }.execute(urlArrayFinal);
         holder.title.setText(post.getmTitle());
         holder.commentsNumber.setText(String.valueOf(post.getmPoints()));
-        holder.subreddit.setText(post.getmSubreddit());
-        holder.postDate.setText(post.getmPostDate());
+        holder.subreddit.setText("/r/" + post.getmSubreddit());
+        long now = System.currentTimeMillis();
+        Date time = new Date(post.getmPostDate() * 1000);
+        CharSequence date = DateUtils.getRelativeTimeSpanString(time.getTime(), now, DateUtils.DAY_IN_MILLIS);
+        holder.postDate.setText(date);
 
         return convertView;
     }
 
-    private URL[] urlArrayCreate(PostModel post) {
-        URL[] urls = new URL[1];
-        try {
-            urls[0] = new URL(post.getmThumbnail());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    class ImageDownloader extends AsyncTask<URL, Integer, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(URL... urls) {
+            URL url = urls[0];
+            Bitmap bitmap = null;
 
-        return urls;
+            if (url != null) {
+                HttpURLConnection connection;
+                try {
+                    connection = (HttpURLConnection) url.openConnection();
+                    InputStream stream = connection.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(stream, null, null);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+            return bitmap;
+        }
     }
 }
